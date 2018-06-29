@@ -3,10 +3,7 @@
   "version": "0.1.0",
   "description": "vue2.0+ project snippets fro Atom",
   "keywords": ["vue", "snippets", "axios", "ElementUI", "vue-router", "vuex"],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com:vxhly/vue2-project-snippets.git"
-  },
+  "repository": "https://github.com/vxhly/vue2-project-snippets",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
