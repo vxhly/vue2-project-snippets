@@ -1,0 +1,25 @@
+'.source.js':
+  
+  'ES6->  export  module':
+    'prefix': 'export',
+    'body': """
+    export default ${1:module}
+    """
+
+  'ES6-> import module':
+    'prefix': 'import',
+    'body': """
+    import ${1:module} from '${2:url}'
+    """
+    
+  'ES^-> ES6 class':
+    'prefix': 'class',
+    'body': """
+    const ${1:className} = class {
+      constructor() {
+        $2
+      }
+    }
+    
+    export default ${1:className}
+    """

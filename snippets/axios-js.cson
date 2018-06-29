@@ -1,0 +1,275 @@
+'.source.js':
+
+ 'axios-> import axios':
+    'prefix': 'ax-im',
+    'body': """
+    import axios from '@/lib/axios'
+    """
+    
+ 'axios-> get api function':
+    'prefix': 'ax-get',
+    'body': """
+    /**
+     * [get${1:functionName} description]
+     * @method get${1:functionName}
+     * @param  {[type]}        param [description]
+     * @return {[type]}        [description]
+     */
+    export async function get${1:functionName}(param) {
+      try {
+        let url = `${1:url}`
+        if(param) url = `${url}?param=${param}`
+
+        const response = await axios.get(`${url}`)
+
+        return response.data
+      } catch (err) {
+        if (err.response) {
+          throw Error(err.response.data.message)
+        }
+        throw err;
+      }
+    }
+    """
+    
+ 'axios-> post api function':
+    'prefix': 'ax-post',
+    'body': """
+    /**
+     * [post${1:functionName} description]
+     * @method post${1:functionName}
+     * @param  {[type]}         payload [description]
+     * @return {[type]}         [description]
+     */
+    export async function post${1:functionName}(payload) {
+      try {
+        const url = `${1:url}`
+
+        const response = await axios.post(`${url}`, payload)
+
+        return response.data
+      } catch (err) {
+        if (err.response) {
+          throw Error(err.response.data.message)
+        }
+        throw err;
+      }
+    }
+    """
+
+ 'axios-> patch api function':
+    'prefix': 'ax-patch',
+    'body': """
+    /**
+     * [patch${1:functionName} description]
+     * @method patch${1:functionName}
+     * @param  {[type]}          param   [description]
+     * @param  {[type]}          payload [description]
+     * @return {[type]}          [description]
+     */
+    export async function patch${1:functionName} (param, payload) {
+      try {
+        let url = `${1:url}`
+        if(param) url = `${url}?param=${param}`
+
+        const response = await axios.patch(`${url}`, payload)
+
+        return response.data
+      } catch (err) {
+        if (err.response) {
+          throw Error(err.response.data.message)
+        }
+        throw err
+      }
+    }
+    """
+
+ 'axios-> put api function':
+    'prefix': 'ax-put',
+    'body': """
+    /**
+     * [put${1:functionName} description]
+     * @method put${1:functionName}
+     * @param  {[type]}        payload [description]
+     * @return {[type]}        [description]
+     */
+    export async function put${1:functionName} (payload) {
+      try {
+        const url = `${1:url}`
+
+        const response = await axios.patch(`${url}`, payload)
+
+        return response.data
+      } catch (err) {
+        if (err.response) {
+          throw Error(err.response.data.message)
+        }
+        throw err
+      }
+    }
+    """
+    
+ 'axios-> delete api function':
+    'prefix': 'ax-delete',
+    'body': """
+    /**
+     * [delete${1:functionName} description]
+     * @method delete${1:functionName}
+     * @param  {[type]}           param   [description]
+     * @param  {[type]}           payload [description]
+     * @return {[type]}           [description]
+     */
+    export async function delete${1:functionName} (param, payload) {
+      try {
+        let url = `${1:url}`
+        if(param) url = `${url}/${param}`
+
+        const response = await axios.delete(`${url}`, {data: payload})
+
+        return response.data
+      } catch (err) {
+        if (err.response) {
+          throw Error(err.response.data.message)
+        }
+
+        throw err
+      }
+    }
+    """
+    
+ 'axios-> create axios example':
+    'prefix': 'ax-init',
+    'body': """
+    import axios from 'axios'
+    import config from '@/config'
+    
+    const protocol = window.location.protocol
+    const host = window.location.host
+    const domain = document.domain
+    let serverUrl = ''
+    
+    if (domain === '127.0.0.1' || domain === 'localhost') {
+      serverUrl = config.serverUrl
+    } else {
+      serverUrl = `${protocol}` + '//' + `${host}:8000/api`
+    }
+    
+    // create axios
+    const instance = axios.create({
+      baseURL: serverUrl,
+      timeout: 0
+    })
+    
+    // http request interceptors
+    instance.interceptors.request.use(
+      config => {
+        // config.headers['Authorization'] = ''
+        // Add parameters in the request header
+        
+        return config
+      },
+      error => {
+        return Promise.reject(error)
+      }
+    )
+    
+    // http response interceptors
+    instance.interceptors.response.use(
+      response => {
+        return response
+      },
+      error => {
+        // Add error code processing method
+        
+        return Promise.reject(error)
+      }
+    )
+
+    export default instance
+    """
+
+ 'axios-> create axios - full example(includes vuex and vue-router)':
+    'prefix': 'ax-init-full',
+    'body': """
+    import axios from 'axios'
+    import config from '@/config'
+    import store from '@/store'
+    import router from '@/router'
+    
+    const protocol = window.location.protocol
+    const host = window.location.host
+    const domain = document.domain
+    let serverUrl = ''
+    
+    if (domain === '127.0.0.1' || domain === 'localhost') {
+      serverUrl = config.serverUrl
+    } else {
+      serverUrl = `${protocol}` + '//' + `${host}:8000/api`
+    }
+    
+    // create axios
+    const instance = axios.create({
+      baseURL: serverUrl,
+      timeout: 0
+    })
+    
+    // http request interceptors
+    instance.interceptors.request.use(
+      config => {
+        // config.headers['Authorization'] = ''
+        // Add parameters in the request header
+        
+        if (store.state.auth.authToken) {
+          config.headers['Authorization'] = `Bearer ${store.state.auth.authToken}`
+        }
+        
+        return config
+      },
+      error => {
+        return Promise.reject(error)
+      }
+    )
+    
+    // http response interceptors
+    instance.interceptors.response.use(
+      response => {
+        return response
+      },
+      error => {
+        // Add error code processing method
+        
+        if (error.response) {
+          const err = error.response.data
+          switch (err.code) {
+          case 401:
+            setTimeout(() => {
+              store.dispatch('logout')
+              router.replace({
+                name: 'Login'
+              })
+            }, 500)
+            break
+          case 404:
+            setTimeout(() => {
+              router.replace({
+                name: 'NotFound'
+              })
+            }, 500)
+            break
+          case 422:
+            // 422 processing method
+            break
+          case 500:
+            // 500 processing method
+            break
+          default:
+            // No match to do ...  
+          }
+        }
+        
+        return Promise.reject(error)
+      }
+    )
+
+    export default instance
+    """

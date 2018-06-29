@@ -1,0 +1,178 @@
+'.text.html.vue':
+  
+  'vue.js-> vue2 template':
+    'prefix': 'template',
+    'body': """
+    <template>
+      <div id="$1">
+      </div>
+    </template>
+    
+    <script>
+      export default {
+        name: '$2',
+        data: () => ({
+          $3
+        })
+      }
+    </script>
+    
+    <style${4: lang="${4:scss}"} ${5:scoped}>
+    </style>
+    """
+
+'.meta.tag':
+  
+  'Vue.js-> v-for':
+    'prefix': 'v-for',
+    'body': """
+    v-for="(${1:elem}, ${2:index}) in ${3:elemArray}" :key="${2:index}"
+    """
+
+  'Vue.js-> v-if':
+    'prefix': 'v-if',
+    'body': """
+    v-if="${1:condition}"
+    """
+    
+  'Vue.js-> v-else':
+    'prefix': 'v-else',
+    'body': """
+    v-else="${1:condition}"
+    """
+    
+  'Vue.js-> v-else-if':
+    'prefix': 'v-else-if',
+    'body': """
+    v-else-if="${1:condition}"
+    """
+    
+  'Vue.js-> v-show':
+    'prefix': 'v-show',
+    'body': """
+    v-show="${1:condition}"
+    """
+    
+  'Vue.js-> v-text':
+    'prefix': 'v-text',
+    'body': """
+    v-text="${1:condition}"
+    """
+    
+  'Vue.js-> v-html':
+    'prefix': 'v-html',
+    'body': """
+    v-html="${1:condition}"
+    """
+    
+  'Vue.js-> v-on':
+    'prefix': 'v-on',
+    'body': """
+    @{$1:click}="${2:functionName}"
+    """
+
+  'Vue.js-> v-bind':
+    'prefix': 'v-bind',
+    'body': """
+    :${1:attribute}="${2}"
+    """
+
+  'Vue.js-> v-model':
+    'prefix': 'v-model',
+    'body': """
+    v-model="${1:model}"
+    """
+
+'.source.js':
+    
+  'Vue.js-> model':
+    'prefix': 'model',
+    'body': """
+    model: {
+      prop: '${1:prop}',
+      event: 'change'
+    }
+    """
+    
+  'Vue.js-> props':
+    'prefix': 'props',
+    'body': """
+    props: {
+      ${1:propName}: {
+        type: ${2:propType},
+        required: ${3:true},
+        default: () => {
+          return ${5:'propDefault'}
+        }
+      }
+    }
+    """
+    
+  'Vue.js-> data':
+    'prefix': 'data',
+    'body': """
+    data: () => ({
+      $1
+    })
+    """
+
+  'Vue.js-> watch':
+    'prefix': 'watch',
+    'body': """
+    watch: {
+      ${1:propertyToWatch} (val) {
+        // do something when ${1:propertyToWatch} value changes
+        $2
+      }
+    }
+    """
+    
+  'Vue.js-> watch with deep':
+    'prefix': 'watch-deep',
+    'body': """
+    watch: {
+      ${1:propertyToWatch}: {
+        handler (val) {
+          // do something when ${1:propertyToWatch} value changes
+          $2
+        },
+        deep: true
+      }
+    }
+    """
+
+  'Vue.js-> mounted':
+    'prefix': 'mounted',
+    'body': """
+    mounted: () => ({
+      $1
+    })
+    """
+    
+  'Vue.js-> computed':
+    'prefix': 'computed',
+    'body': """
+    computed: {
+      ${1:computedDataName} () {
+        $2
+      }
+    }
+    """
+
+  'Vue.js-> methods':
+    'prefix': 'methods',
+    'body': """
+    methods: {
+      ${1:functionName} () {
+        $2
+      }
+    }
+    """
+    
+  'Vue.js-> components':
+    'prefix': 'components',
+    'body': """
+    components: {
+      ${1:componentName}
+    }
+    """
