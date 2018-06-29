@@ -1,6 +1,8 @@
-# vue2-project-snippets,
+# vue2-project-snippets
 
-vue2.0+ project snippets fro Atom
+[![GitHub stars](https://img.shields.io/github/stars/vxhly/vue2-project-snippets.svg)](https://github.com/vxhly/vue2-project-snippets/stargazers) [![GitHub forks](https://img.shields.io/github/forks/vxhly/vue2-project-snippets.svg)](https://github.com/vxhly/vue2-project-snippets/network) [![GitHub issues](https://img.shields.io/github/issues/vxhly/vue2-project-snippets.svg)](https://github.com/vxhly/vue2-project-snippets/issues) [![GitHub license](https://img.shields.io/github/license/vxhly/vue2-project-snippets.svg)](https://github.com/vxhly/vue2-project-snippets/blob/master/LICENSE)
+
+> vue2.0+ project snippets fro Atom
 
 Prefix            | Description
 ----------------- | :--------------------------------------------------------
